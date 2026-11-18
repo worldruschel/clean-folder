@@ -3,7 +3,7 @@
 ; Тихое обновление из программы: CleanFolder-Setup-X.Y.Z.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART /UPDATE=1 [/RELAUNCH=1]
 
 #define AppName "Чистая папка"
-#define AppVersion "2.0.0"
+#define AppVersion "2.0.1"
 #define AppExe "CleanFolder.exe"
 #define BuildDir "..\src\CleanFolder\bin\Release\net48"
 

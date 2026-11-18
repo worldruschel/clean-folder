@@ -33,6 +33,17 @@ namespace CleanFolder
         async void TakeShots()
         {
             await Task.Delay(300);
+            // кадр в теме из настроек, до любых переключений – как видит пользователь при запуске
+            foreach (var p in new[] { Page.Suggestions, Page.Large })
+            {
+                SetPage(p);
+                await Task.Delay(250);
+                using (var bmp = new Bitmap(Width, Height))
+                {
+                    DrawToBitmap(bmp, new Rectangle(0, 0, Width, Height));
+                    bmp.Save($"{ShotPrefix}-start-{p}.png", System.Drawing.Imaging.ImageFormat.Png);
+                }
+            }
             foreach (var mode in new[] { ThemeMode.Light, ThemeMode.Dark })
             {
                 Theme.Apply(mode);
@@ -844,6 +855,8 @@ namespace CleanFolder
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            // элементы созданы до чтения настроек – применяем выбранную тему ко всему окну
+            Theme.Refresh(this);
             if (ShotPrefix != null) { pathBox.Text = startFolder; StartScan(); return; }
             if (!cfg.ContextMenuInitialized)
             {

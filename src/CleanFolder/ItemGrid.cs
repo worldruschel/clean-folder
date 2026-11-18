@@ -58,7 +58,8 @@ namespace CleanFolder
         protected override void OnHandleCreated(EventArgs e)
         {
             base.OnHandleCreated(e);
-            Theme.Scrollbars(this);
+            // Таблицы создаются раньше, чем выбрана тема из настроек, – берём цвета заново
+            ThemeChanged();
             foreach (Control c in Controls) { if (!c.IsHandleCreated) c.HandleCreated += (s, a) => Theme.Scrollbars((Control)s); else Theme.Scrollbars(c); }
         }
 
@@ -287,6 +288,8 @@ namespace CleanFolder
             var s = view[e.RowIndex];
             bool hover = e.RowIndex == hoverRow;
             e.CellStyle.BackColor = hover ? p.Hover : p.Surface;
+            e.CellStyle.ForeColor = p.Text;
+            e.CellStyle.SelectionForeColor = p.Text;
             if (e.ColumnIndex == CFolder || e.ColumnIndex == CDate) e.CellStyle.ForeColor = p.Muted;
             if (e.ColumnIndex == CReason) e.CellStyle.ForeColor = Errors.ContainsKey(s) ? p.Danger : p.Muted;
             e.CellStyle.SelectionBackColor = hover ? Theme.Blend(p.Selection, p.Accent, 0.08f) : p.Selection;
