@@ -77,3 +77,8 @@ powershell -ExecutionPolicy Bypass -File tools\release.ps1 -Notes "Что нов
 ## Лицензия
 
 [MIT](LICENSE)
+
+## Поддержка и обратная связь
+
+- ❤️ Поддержать автора: [Boosty](https://boosty.to/worldruschel/donate)
+- ✉️ Предложения, идеи и замечания: [worldruschel@gmail.com](mailto:worldruschel@gmail.com)
